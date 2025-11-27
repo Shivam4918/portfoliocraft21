@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}PortfolioCraft{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            peach: '#FCD8CD',
+            pink: '#FEEBF6',
+            lavender: '#EBD6FB',
+            royalblue: '#687FE5',
+          },
+          animation: {
+            'bounce-x': 'bounceX 1s infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            bounceX: {
+              '0%, 100%': { transform: 'translateX(-25%)' },
+              '50%': { transform: 'translateX(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-15px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FCD8CD;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #FCD8CD 0%, #EBD6FB 50%, #FEEBF6 100%);
+    }
+
+    .btn-primary {
+      background-color: #687FE5;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(104, 127, 229, 0.4);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .auth-container {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #6B7280;
+      margin: 20px 0;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .or-divider::before {
+      margin-right: 10px;
+    }
+
+    .or-divider::after {
+      margin-left: 10px;
+    }
+
+    .flash-message {
+      animation: slideIn 0.5s forwards, fadeOut 0.5s 3s forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+
+    .theme-default {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+
+    .theme-modern {
+      background-color: #f5f5f5;
+      color: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+    }
+
+
+    .theme-creative {
+      background-color: #fff0f5;
+      color: #4b0082;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+
+    .theme-minimal {
+      background-color: #fafafa;
+      color: #333333;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+
+    .theme-dark {
+      background-color: #1e1e1e;
+      color: #ffffff;
+      font-family: 'Roboto Mono', monospace;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="fixed top-4 right-4 z-50 space-y-2">
+    {% for category, message in messages %}
+    <div class="flash-message px-6 py-3 rounded-md shadow-lg text-white
+            {% if category == 'success' %} bg-green-500
+            {% elif category == 'danger' %} bg-red-500
+            {% elif category == 'info' %} bg-blue-500
+            {% else %} bg-gray-500 {% endif %}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(msg => {
+        setTimeout(() => {
+          msg.remove();
+        }, 3500);
+      });
+
+
+      const animatedElements = document.querySelectorAll('[data-animate]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-' + entry.target.dataset.animate);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      animatedElements.forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | PortfolioCraft{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-lg hidden md:block">
+        <div class="p-6 border-b">
+            <h2 class="text-2xl font-bold text-indigo-600 flex items-center space-x-2">
+                <!-- Briefcase Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9.75 6.75V5.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v1.5M3.75 9h16.5v9.75a.75.75 0 01-.75.75H4.5a.75.75 0 01-.75-.75V9z" />
+                </svg>
+                <span>PortfolioCraft</span>
+            </h2>
+        </div>
+        <nav class="p-6 space-y-4">
+            <a href="#" class="block text-gray-700 font-medium hover:text-indigo-600">Dashboard</a>
+            <a href="#users" class="block text-gray-700 font-medium hover:text-indigo-600">Users</a>
+            <a href="#portfolios" class="block text-gray-700 font-medium hover:text-indigo-600">Portfolios</a>
+            <a href="{{ url_for('admin.admin_logout') }}"
+                class="block text-red-500 font-medium hover:text-red-600">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-6 bg-gray-50">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+        </div>
+
+        <!-- Analytics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="p-6 rounded-xl shadow-md bg-gradient-to-r from-indigo-500 to-indigo-400 text-white">
+                <h2 class="text-lg font-semibold">Total Users</h2>
+                <p class="text-3xl font-bold">{{ total_users }}</p>
+            </div>
+            <div class="p-6 rounded-xl shadow-md bg-gradient-to-r from-green-500 to-green-400 text-white">
+                <h2 class="text-lg font-semibold">Total Portfolios</h2>
+                <p class="text-3xl font-bold">{{ total_portfolios }}</p>
+            </div>
+            <div class="p-6 rounded-xl shadow-md bg-gradient-to-r from-purple-500 to-purple-400 text-white">
+                <h2 class="text-lg font-semibold">Resumes Uploaded</h2>
+                <p class="text-3xl font-bold">{{ total_resumes }}</p>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="p-6 bg-white shadow-md rounded-xl">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Portfolios by Users</h2>
+                <canvas id="portfolioChart" class="w-full h-64"></canvas>
+            </div>
+            <div class="p-6 bg-white shadow-md rounded-xl">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">User Roles</h2>
+                <canvas id="roleChart" class="w-full h-64"></canvas>
+            </div>
+            <div class="p-6 bg-white shadow-md rounded-xl">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Portfolio Growth</h2>
+                <canvas id="growthChart" class="w-full h-64"></canvas>
+            </div>
+            <div class="p-6 bg-white shadow-md rounded-xl">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Resume Stats</h2>
+                <canvas id="resumeChart" class="w-full h-64"></canvas>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div id="users" class="p-6 bg-white shadow-md rounded-xl mb-8 overflow-x-auto">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Users</h2>
+            <table id="usersTable" class="min-w-full border border-gray-200 display">
+                <thead class="bg-gray-100 text-gray-700 uppercase text-sm">
+                    <tr>
+                        <th class="px-4 py-2 border-b">ID</th>
+                        <th class="px-4 py-2 border-b">Name</th>
+                        <th class="px-4 py-2 border-b">Email</th>
+                        <th class="px-4 py-2 border-b">Admin</th>
+                        <th class="px-4 py-2 border-b">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600">
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+                        <td>
+                            {% if not user.is_admin %}
+                            <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST"
+                                onsubmit="return confirm('Delete this user?');">
+                                <button type="submit"
+                                    class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm">Delete</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Portfolios Table -->
+        <div id="portfolios" class="p-6 bg-white shadow-md rounded-xl mb-8 overflow-x-auto">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Portfolios</h2>
+            <table id="portfoliosTable" class="min-w-full border border-gray-200 display">
+                <thead class="bg-gray-100 text-gray-700 uppercase text-sm">
+                    <tr>
+                        <th class="px-4 py-2 border-b">ID</th>
+                        <th class="px-4 py-2 border-b">Title</th>
+                        <th class="px-4 py-2 border-b">User</th>
+                        <th class="px-4 py-2 border-b">Created At</th>
+                        <th class="px-4 py-2 border-b">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600">
+                    {% for portfolio in portfolios %}
+                    <tr>
+                        <td>{{ portfolio.id }}</td>
+                        <td>{{ portfolio.title }}</td>
+                        <td>{{ portfolio.user.full_name }}</td>
+                        <td>{{ portfolio.created_at.strftime('%b %d, %Y') }}</td>
+                        <td>
+                            <form action="{{ url_for('admin.delete_portfolio', portfolio_id=portfolio.id) }}"
+                                method="POST" onsubmit="return confirm('Delete this portfolio?');">
+                                <button type="submit"
+                                    class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    /* === Charts === */
+    const ctx1 = document.getElementById('portfolioChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: [{% for user in users %}'{{ user.full_name }}',{% endfor %}],
+        datasets: [{
+            label: 'Portfolios per User',
+            data: [{% for user in users %}{{ user.portfolios | length }}, {% endfor %}],
+        backgroundColor: 'rgba(99, 102, 241, 0.7)',
+        borderColor: 'rgba(99, 102, 241, 1)',
+        borderWidth: 1
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    const ctx2 = document.getElementById('roleChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Admins', 'Users'],
+            datasets: [{
+                data: [
+                    {{ users | selectattr("is_admin", "equalto", True) | list | length }},
+                    {{ users | selectattr("is_admin", "equalto", False) | list | length }}
+                ],
+        backgroundColor: ['#6366f1', '#10b981']
+            }]
+        }
+    });
+
+    const ctx3 = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: [{% for portfolio in portfolios %}'{{ portfolio.created_at.strftime("%b %d") }}',{% endfor %}],
+        datasets: [{
+            label: 'Portfolio Growth',
+            data: [{% for portfolio in portfolios %}{{ loop.index }}, {% endfor %}],
+        borderColor: '#8b5cf6',
+        backgroundColor: 'rgba(139,92,246,0.3)',
+        fill: true
+            }]
+        }
+    });
+
+    const ctx4 = document.getElementById('resumeChart').getContext('2d');
+    new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: ['Uploaded', 'Not Uploaded'],
+            datasets: [{
+                data: [{{ total_resumes }}, {{ total_users - total_resumes }}],
+        backgroundColor: ['#f59e0b', '#e5e7eb']
+            }]
+        }
+    });
+
+    /* === DataTables === */
+    $(document).ready(function () {
+        $('#usersTable').DataTable({
+            pageLength: 5,
+            lengthMenu: [5, 10, 25],
+            order: [[0, 'asc']]
+        });
+        $('#portfoliosTable').DataTable({
+            pageLength: 5,
+            lengthMenu: [5, 10, 25],
+            order: [[0, 'asc']]
+        });
+    });
+</script>
+
+
+
+{% endblock %}

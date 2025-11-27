@@ -1,0 +1,24 @@
+// tailwind.config.js
+module.exports = {
+  content: [
+    "./templates/**/*.html",
+    "./static/**/*.js",
+    "./app/**/*.py"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        peach: '#FCD8CD',
+        pink: '#FEEBF6',
+        lavender: '#EBD6FB',
+        royalblue: '#687FE5',
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s ease infinite',
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'), // 👈 Add this line
+  ],
+};

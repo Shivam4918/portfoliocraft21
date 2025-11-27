@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+
+{% block title %}PortfolioCraft | AI-Powered Portfolio Builder{% endblock %}
+
+{% block content %}
+
+<nav class="bg-white shadow-sm py-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 flex items-center">
+          <svg class="h-8 w-8 text-royalblue" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="currentColor" stroke-width="2" />
+            <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14M9 10H9.01M15 10H15.01" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="ml-2 text-xl font-bold text-gray-800">PortfolioCraft</span>
+        </div>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-center space-x-4">
+          <a href="#features"
+            class="text-gray-700 hover:text-royalblue px-3 py-2 rounded-md text-sm font-medium">Features</a>
+          <a href="#how-it-works"
+            class="text-gray-700 hover:text-royalblue px-3 py-2 rounded-md text-sm font-medium">How It Works</a>
+          <a href="#who-its-for" class="text-gray-700 hover:text-royalblue px-3 py-2 rounded-md text-sm font-medium">Who
+            It's For</a>
+          <a href="#sample-portfolios"
+            class="text-gray-700 hover:text-royalblue px-3 py-2 rounded-md text-sm font-medium">Samples</a>
+
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="{{ url_for('main.login') }}"
+          class="text-gray-700 hover:text-royalblue px-3 py-2 rounded-md text-sm font-medium">Login</a>
+        <a href="{{ url_for('main.signup') }}"
+          class="bg-royalblue text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition">Sign
+          Up Free</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero-gradient py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+      <div class="mb-12 lg:mb-0">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Build Your Perfect Portfolio <span
+            class="text-royalblue">With AI</span></h1>
+        <p class="text-lg text-gray-600 mb-8">Upload your resume and let our AI create a stunning professional portfolio
+          in minutes. Customize with drag-and-drop and publish with one click.</p>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="{{ url_for('main.signup') }}"
+            class="btn-primary text-white px-6 py-3 rounded-lg font-medium text-center">Get Started - It's Free</a>
+          <a href="#how-it-works"
+            class="border border-royalblue text-royalblue px-6 py-3 rounded-lg font-medium text-center hover:bg-royalblue hover:text-white transition">See
+            How It Works</a>
+        </div>
+        <div class="mt-8 flex items-center">
+          <div class="flex -space-x-2">
+          </div>
+        </div>
+      </div>
+      <div class="relative animate-float">
+        <div class="relative z-10 bg-white p-2 rounded-2xl shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Portfolio Example" class="rounded-xl w-full">
+        </div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-lavender rounded-2xl opacity-70"></div>
+        <div class="absolute -top-6 -right-6 w-24 h-24 bg-pink rounded-2xl opacity-70"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="features" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Powerful Features</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Everything you need to create a professional portfolio that
+        stands out</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="feature-card bg-pink p-8 rounded-xl transition duration-300" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">AI-Powered Generation</h3>
+        <p class="text-gray-600">Upload your resume and our AI will create a complete portfolio draft in seconds,
+          including professional summaries.</p>
+      </div>
+
+      <div class="feature-card bg-peach p-8 rounded-xl transition duration-300" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Drag-and-Drop Editor</h3>
+        <p class="text-gray-600">Easily customize every section with our intuitive drag-and-drop interface. No coding
+          required.</p>
+      </div>
+
+      <div class="feature-card bg-lavender p-8 rounded-xl transition duration-300" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+            </path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Beautiful Themes</h3>
+        <p class="text-gray-600">Choose from professionally designed templates that adapt to your content and style
+          preferences.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="how-it-works" class="py-20 bg-pink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">How PortfolioCraft Works</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Create your perfect portfolio in just 3 simple steps</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="text-center" data-animate="fadeIn">
+        <div
+          class="w-20 h-20 bg-royalblue rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
+          1</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Upload Your Resume</h3>
+        <p class="text-gray-600">Simply upload your resume in PDF or Word format. Our system will extract all the
+          important information.</p>
+      </div>
+      <div class="text-center" data-animate="fadeIn">
+        <div
+          class="w-20 h-20 bg-royalblue rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
+          2</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">AI Generates Your Portfolio</h3>
+        <p class="text-gray-600">Our AI analyzes your resume and creates a complete portfolio draft with professional
+          summaries.</p>
+      </div>
+      <div class="text-center" data-animate="fadeIn">
+        <div
+          class="w-20 h-20 bg-royalblue rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
+          3</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Customize & Publish</h3>
+        <p class="text-gray-600">Use our editor to personalize your portfolio, then publish with one click and share
+          your unique link.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="who-its-for" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Who Is PortfolioCraft For?</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Whether you're just starting out or advancing your career,
+        PortfolioCraft helps you showcase your story.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-pink bg-opacity-30 p-8 rounded-xl shadow-md text-center" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Students & Freshers</h3>
+        <p class="text-gray-600">Display your academic projects, certifications, and early experiences with style.</p>
+      </div>
+      <div class="bg-peach bg-opacity-30 p-8 rounded-xl shadow-md text-center" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h2l3 10h8l3-10h2"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Freelancers</h3>
+        <p class="text-gray-600">Showcase client work, testimonials, and service offerings in one elegant page.</p>
+      </div>
+      <div class="bg-lavender bg-opacity-30 p-8 rounded-xl shadow-md text-center" data-animate="fadeIn">
+        <div class="w-14 h-14 bg-royalblue bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-6 h-6 text-royalblue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 14l6.16-3.422A12.083 12.083 0 0118 17.5c0 .338-.013.674-.038 1.007L12 21l-5.962-2.493A10.978 10.978 0 016 17.5c0-1.51.327-2.944.9-4.215L12 14z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Job Seekers</h3>
+        <p class="text-gray-600">Convert your resume into an interactive portfolio that recruiters remember.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="sample-portfolios" class="py-24 bg-gradient-to-b from-white via-pink-50 to-peach-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">Explore Sample Portfolios</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Preview AI-crafted portfolios for different roles. Get
+        inspired, get started!</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+
+      <div
+        class="bg-white rounded-2xl shadow-xl overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
+        data-animate="fadeIn">
+        <img
+          src="https://media.istockphoto.com/id/813507728/photo/developer-team-working-laptop-computer-mobile-application-softwareand-web-design-online.jpg?b=1&s=612x612&w=0&k=20&c=LwoX14C-hDoJBatWA1ca36QgpM4OD6Ois5EzmJS7wMA="
+          alt="Full Stack Developer Portfolio" class="w-full h-52 object-cover">
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">Full Stack Developer</h3>
+          <p class="text-sm text-gray-600 mb-4">Modern MERN-stack portfolio with GitHub, blogs & live project links.</p>
+          <a href="#"
+            class="inline-block px-4 py-2 bg-royalblue text-white text-sm rounded-full hover:bg-royalblue/90 transition">View
+            Sample</a>
+        </div>
+      </div>
+
+
+      <div
+        class="bg-white rounded-2xl shadow-xl overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
+        data-animate="fadeIn">
+        <img src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?auto=format&fit=crop&w=800&q=80"
+          alt="UI/UX Designer Portfolio" class="w-full h-52 object-cover">
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">UI/UX Designer</h3>
+          <p class="text-sm text-gray-600 mb-4">Creative, minimal portfolio with Behance and Dribbble integration.</p>
+          <a href="#"
+            class="inline-block px-4 py-2 bg-royalblue text-white text-sm rounded-full hover:bg-royalblue/90 transition">View
+            Sample</a>
+        </div>
+      </div>
+
+
+      <div
+        class="bg-white rounded-2xl shadow-xl overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
+        data-animate="fadeIn">
+        <img
+          src="https://media.istockphoto.com/id/1276383007/photo/multiracial-young-people-enjoying-group-study-at-table.jpg?b=1&s=612x612&w=0&k=20&c=5CJoERZEKPOoJo1tX_2IAIVpUIb-3oySqX0_BTJkcXg="
+          alt="Student Portfolio" class="w-full h-52 object-cover">
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-1">Computer Science Student</h3>
+          <p class="text-sm text-gray-600 mb-4">Resume-to-portfolio format with academic projects, hackathons & skills.
+          </p>
+          <a href="#"
+            class="inline-block px-4 py-2 bg-royalblue text-white text-sm rounded-full hover:bg-royalblue/90 transition">View
+            Sample</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="py-16 bg-royalblue text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold mb-6">Ready to Build Your Perfect Portfolio?</h2>
+    <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of professionals who've transformed their resumes into
+      stunning portfolios</p>
+    <a href="{{ url_for('main.signup') }}"
+      class="inline-block bg-white text-royalblue px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition">Get
+      Started for Free</a>
+  </div>
+</section>
+
+
+<footer class="bg-gray-800 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-4">PortfolioCraft</h3>
+        <p class="text-gray-400">The easiest way to create a professional portfolio from your resume using AI.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Product</h3>
+        <ul class="space-y-2">
+          <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+          <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Templates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Resources</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Tutorials</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Company</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400">© 2025 PortfolioCraft. All rights reserved.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="#" class="text-gray-400 hover:text-white transition">
+          <span class="sr-only">Twitter</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+            </path>
+          </svg>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-white transition">
+          <span class="sr-only">LinkedIn</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+            </path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const animatedElements = document.querySelectorAll('[data-animate="fadeIn"]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  });
+</script>
+{% endblock %}

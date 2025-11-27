@@ -1,0 +1,49 @@
+node_modules/
+.env".env" 
+"__pycache__/" 
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Distribution / build
+build/
+dist/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment config (sensitive)
+*.env
+PortfolioCraft/.env
+PortfolioCraft/app/ai_processor.py
+
+# uploads (ignore if not required)
+PortfolioCraft/static/uploads/
+
+# Git
+/.git
+
+# Editor temp files
+*~
+*.swp

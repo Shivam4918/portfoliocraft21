@@ -1,0 +1,1087 @@
+<!-- templates/preview.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{{ user.full_name or 'Portfolio' }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fbfbfb;
+      --card: #fff;
+      --muted: #6b7280;
+      --text: #0f172a;
+      --accent: #687FE5;
+      --accent-2: #EBD6FB;
+      --accent-3: #94a3f4;
+      --accent-4: #1f2937;
+      --chip-bg: #eef2ff;
+      --chip-text: #3b82f6;
+    }
+
+
+    :root[data-palette="p1"] {
+      --accent: #FFD3D5;
+      --accent-2: #92487A;
+      --accent-3: #540863;
+      --accent-4: #E49BA6;
+      --chip-bg: #FFEDED;
+      --chip-text: #92487A;
+    }
+
+    :root[data-palette="p2"] {
+      --accent: #EFECE3;
+      --accent-2: #8FABD4;
+      --accent-3: #4A70A9;
+      --accent-4: #000000;
+      --chip-bg: #EAF6FF;
+      --chip-text: #4A70A9;
+    }
+
+    :root[data-palette="p3"] {
+      --accent: #9BB4C0;
+      --accent-2: #E1D0B3;
+      --accent-3: #A18D6D;
+      --accent-4: #703B3B;
+      --chip-bg: #F0F6F6;
+      --chip-text: #6B6B6B;
+    }
+
+    :root[data-palette="p4"] {
+      --accent: #96A78D;
+      --accent-2: #B6CEB4;
+      --accent-3: #D9E9CF;
+      --accent-4: #F0F0F0;
+      --chip-bg: #EEF7F0;
+      --chip-text: #2F4A3D;
+    }
+
+    :root[data-palette="p5"] {
+      --accent: #FFF5F2;
+      --accent-2: #F5BABB;
+      --accent-3: #568F87;
+      --accent-4: #064232;
+      --chip-bg: #FFF0EE;
+      --chip-text: #B64A4A;
+    }
+
+    :root[data-palette="p6"] {
+      --accent: #EAE4D5;
+      --accent-2: #F2F2F2;
+      --accent-3: #B6B09F;
+      --accent-4: #000000;
+      --chip-bg: #F7F7F7;
+      --chip-text: #6B6B6B;
+    }
+
+    :root[data-palette="p7"] {
+      --accent: #F8FAFC;
+      --accent-2: #D9EAFD;
+      --accent-3: #BCCCDC;
+      --accent-4: #9AA6B2;
+      --chip-bg: #F0F7FF;
+      --chip-text: #345776;
+    }
+
+
+    .theme-dark {
+      --bg: #071026;
+      --card: #071428;
+      --muted: #9fb3d0;
+      --text: #e6eef8;
+      --chip-bg: #132434;
+      --chip-text: #c7d2fe;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--accent-4);
+      margin: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent-4);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .92rem;
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(90deg, var(--accent), var(--accent-3));
+      color: white;
+      box-shadow: 0 10px 20px rgba(16, 24, 40, 0.08);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    header .btn {
+      background: #687FE5 !important;
+      color: white !important;
+      border-radius: 10px;
+      padding: .50rem .9rem;
+      font-weight: 600;
+      transition: all .25s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    header .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: #5a70d6 !important;
+    }
+
+    header .btn.ghost {
+      background: white !important;
+      border: 1px solid #d2d5e0 !important;
+      color: #344054 !important;
+      transition: all .25s ease;
+    }
+
+    header .btn.ghost:hover {
+      background: #f3f4ff !important;
+      border-color: #687FE5 !important;
+      color: #687FE5 !important;
+      transform: translateY(-2px);
+    }
+
+
+    .select {
+      padding: .35rem .6rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: white;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 22px auto;
+      padding: 0 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+      overflow: hidden;
+    }
+
+    .profile-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .photo {
+      width: 220px;
+      height: 280px;
+      border-radius: 28px 78px 28px 78px;
+      overflow: hidden;
+      border: 6px solid var(--accent-2);
+      box-shadow: 0 14px 40px rgba(2, 6, 23, 0.06);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section-pill {
+      display: inline-block;
+      padding: .36rem .78rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .skill {
+      display: inline-block;
+      background: var(--chip-bg);
+      color: var(--chip-text);
+      padding: .32rem .65rem;
+      border-radius: 999px;
+      margin: .24rem;
+      font-weight: 600;
+      font-size: .86rem;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    }
+
+
+    .modal {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.5);
+      z-index: 80;
+    }
+
+    .modal .inner {
+      width: 92%;
+      max-width: 1100px;
+      max-height: 86vh;
+      overflow: auto;
+      border-radius: 12px;
+      padding: 18px;
+      background: var(--card);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo {
+        width: 160px;
+        height: 200px;
+      }
+
+      .nav-links {
+        display: none
+      }
+    }
+
+
+    .resume-wrap {
+      width: 210mm;
+      max-width: 210mm;
+      background: var(--card);
+      margin: 12px auto;
+      padding: 18mm;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+      box-sizing: border-box;
+      transform-origin: top left;
+    }
+
+    .resume-header {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .resume-photo {
+      width: 140px;
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid #E6EBFF;
+    }
+
+
+
+    .section-pill,
+    h1,
+    h2,
+    h3 {
+      color: var(--accent-4);
+    }
+
+
+
+
+
+    @page {
+      size: A4;
+
+      margin: 8mm;
+    }
+
+    @media print,
+    screen and (min-width: 1px) {
+
+
+      body.pdf-mode header,
+      body.pdf-mode .nav-wrap,
+      body.pdf-mode .controls,
+      body.pdf-mode .nav-links,
+      body.pdf-mode .brand,
+      body.pdf-mode #gridView {
+        display: none !important;
+      }
+
+
+      body.pdf-mode .grid {
+        display: none !important;
+      }
+
+      /* 1. Resume Wrapper for Centering and A4 Sizing */
+
+
+      .container {
+        max-width: none !important;
+        width: auto !important;
+        padding: 0 !important;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+      }
+
+
+      .resume-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+
+      #resumeWrap {
+        width: 194mm !important;
+
+        max-width: 194mm !important;
+        margin: 0 auto !important;
+
+        padding: 0 !important;
+
+        box-shadow: none !important;
+        background: white !important;
+        box-sizing: border-box;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+
+
+
+      .resume-content {
+        display: grid;
+
+        grid-template-columns: 35% 65%;
+        gap: 12px;
+        align-items: start;
+        padding: 10mm 0;
+
+      }
+
+
+      .resume-block {
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 6px 8px;
+
+        border-radius: 4px;
+        background: #fff;
+        box-sizing: border-box;
+      }
+
+      .resume-photo {
+        width: 130px;
+
+        height: 170px;
+        border-radius: 8px;
+      }
+
+
+      .section-text,
+      .resume-muted,
+      .resume-block {
+        font-size: 0.85rem;
+
+        line-height: 1.2;
+      }
+
+      .skill {
+        font-size: 0.75rem;
+
+        padding: .15rem .4rem;
+        margin: .15rem;
+      }
+
+
+      .resume-block,
+      .resume-content>div {
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+
+<body data-palette="{{ session.get('preview_palette','p2') }}" id="bodyRoot">
+
+  <header {% if public %}style="display:none" {% endif %}>
+
+    <div class="nav-wrap">
+      <div class="brand flex items-center gap-2">
+        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+            stroke="#687FE5" stroke-width="2" />
+          <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14M9 10H9.01M15 10H15.01" stroke="#687FE5" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="text-xl font-bold text-gray-800">PortfolioCraft</span>
+      </div>
+
+      <div class="nav-links" id="navbar">
+        <a href="#projects" class="navlink">Projects</a>
+        <a href="#skills" class="navlink">Skills</a>
+        <a href="#education" class="navlink">Education</a>
+        <a href="#contact" class="navlink">Contact</a>
+      </div>
+
+      {% if not public %}
+      <div class="controls">
+        <select id="paletteSelect" class="select" title="Choose palette">
+          <option value="p1">Palette 1</option>
+          <option value="p2">Palette 2</option>
+          <option value="p3">Palette 3</option>
+          <option value="p4">Palette 4</option>
+          <option value="p5">Palette 5</option>
+          <option value="p6">Palette 6</option>
+          <option value="p7">Palette 7</option>
+        </select>
+
+        <button id="toggleTheme" class="btn ghost">ToggleTheme</button>
+        <button id="toggleLayout" class="btn">ToggleLayout</button>
+
+        <a href="{{ url_for('main.customize_portfolio', slug=slug) }}" class="btn ghost">Edit</a>
+        <button id="publishBtn" class="btn">Publish</button>
+        <a id="pdfBtn" href="{{ url_for('main.download_pdf', slug=slug) }}" class="btn ghost">PDF</a>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="gridView" class="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-10">
+
+
+      <aside class="bg-white rounded-2xl p-6 shadow-lg sticky top-24 h-fit">
+
+
+        <div class="w-full aspect-[3/4] rounded-3xl overflow-hidden border-4 border-[var(--accent-2)] shadow-xl mb-5">
+          <img src="{{ profile_base64 or url_for('static', filename='profile_pics/default-profile.png') }}"
+            class="w-full h-full object-cover">
+        </div>
+
+
+        <h2 class="text-2xl font-bold text-[var(--accent-4)]">{{ user.full_name or 'Your Name' }}</h2>
+
+
+        <p class="text-[var(--muted)] mt-2">{{ user.bio or 'Short intro' }}</p>
+
+
+        {% if user.email %}
+        <p class="text-[var(--muted)] mt-2">{{ user.email }}</p>
+        {% endif %}
+
+        {# Build list of extras and split them so left gets the first half (ceil) and right gets the rest #}
+        {% set right_keys = ['education','key expertise','projects','skills','certifications','achievements','contact
+        information'] %}
+        {% set extras = [] %}
+        {% for title, content in portfolio.items() %}
+        {% set key = (title|string).strip().lower() %}
+        {% if content and key not in right_keys %}
+        {% set _ = extras.append([title, content]) %}
+        {% endif %}
+        {% endfor %}
+
+        {# split extras: left receives ceil(n/2) to give the sidebar a little preference #}
+        {% set n = extras|length %}
+        {% set left_count = (n // 2) + (1 if (n % 2) else 0) %}
+        {% set left_extras = extras[:left_count] %}
+        {% set right_extras = extras[left_count:] %}
+
+        {# render left_extras here in the sidebar #}
+        {% for item in left_extras %}
+        {% set title = item[0] %}
+        {% set content = item[1] %}
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-[var(--accent-4)] flex items-center gap-2">
+            <span class="inline-block w-2 h-2 bg-[var(--accent)] rounded-full"></span>
+            {{ title.title() }}
+          </h3>
+          <div class="mt-2 text-[var(--muted)] leading-relaxed text-sm">
+            {% if (content|string).strip().startswith('[') and (content|string).strip().endswith(']') %}
+            {% set cleaned = (content|string).strip()
+            |replace("'", "") |replace('"', '') |replace('[', '') |replace(']', '') %}
+            {{ cleaned | replace(',', ', ') | trim() }}
+            {% else %}
+            {{ content|safe }}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+
+        {# store right_extras variable for use later in right column rendering #}
+
+
+
+      </aside>
+
+
+
+      <section class="space-y-10">
+
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          {% if portfolio.get('education') %}
+          <div>
+            <h3 class="section-title">🎓 Education</h3>
+            <div class="section-text">{{ portfolio['education']|safe }}</div>
+          </div>
+          {% endif %}
+
+          {% if portfolio.get('key expertise') %}
+          <div>
+            <h3 class="section-title">💼 Expertise</h3>
+            <div class="section-text">{{ portfolio['key expertise']|safe }}</div>
+          </div>
+          {% endif %}
+        </div>
+
+        {# Render any right-side extra sections that were split earlier #}
+        {% if right_extras %}
+        {% for item in right_extras %}
+        {% set title = item[0] %}
+        {% set content = item[1] %}
+        <div>
+          <h3 class="section-title">{{ title.title() }}</h3>
+          <div class="section-text">
+            {% if (content|string).strip().startswith('[') and (content|string).strip().endswith(']') %}
+            {% set cleaned = (content|string).strip()
+            |replace("'", "") |replace('"', '') |replace('[', '') |replace(']', '') %}
+            {{ cleaned | replace(',', ', ') | trim() }}
+            {% else %}
+            {{ content|safe }}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+
+        <div id="projects">
+          <h3 class="section-title flex justify-between items-center">
+            📂 Projects
+            <button id="openProjects" class="subtle-btn">Open</button>
+            {% if project_url %}
+            <a href="{{ project_url }}" target="_blank" class="project-link-btn">Visit Project</a>
+            {% endif %}
+          </h3>
+          <div id="projectsContent" class="section-text">
+            {{ portfolio.get('projects')|safe or 'No projects yet.' }}
+          </div>
+        </div>
+
+        <div id="skills">
+          <h3 class="section-title">🛠 Skills</h3>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {% for s in skills_list %}
+            <span class="skill">{{ s }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          {% if portfolio.get('certifications') %}
+          <div>
+            <h3 class="section-title">📜 Certifications</h3>
+            <div class="section-text">{{ portfolio['certifications']|safe }}</div>
+          </div>
+          {% endif %}
+
+          {% if portfolio.get('achievements') %}
+          <div>
+            <h3 class="section-title">🏆 Achievements</h3>
+            <div class="section-text">{{ portfolio['achievements']|safe }}</div>
+          </div>
+          {% endif %}
+        </div>
+
+
+        {% if portfolio.get('contact information') %}
+        <div id="contact">
+          <h3 class="section-title">📞 Contact</h3>
+          <div class="section-text">
+            {{ portfolio['contact information']|safe }}
+          </div>
+        </div>
+        {% endif %}
+
+      </section>
+    </div>
+
+
+    <div id="resumeView" style="display:none; text-align:left; margin-top:12px;">
+      <div id="resumeWrap" class="resume-wrap">
+
+        <div class="resume-header" style="gap:20px; padding-bottom:10px; border-bottom:1px solid #eee;">
+
+          <div class="resume-photo">
+            <img src="{{ profile_base64 or url_for('static', filename='profile_pics/default-profile.png') }}"
+              style="width:100%; height:100%; object-fit:cover;">
+          </div>
+
+          <div style="flex:1; padding-left:10px;">
+            <div class="resume-name">{{ user.full_name or 'Your name' }}</div>
+            <div class="resume-muted">{{ user.bio or '' }}</div>
+            {% if user.email %}
+            <div class="resume-muted" style="margin-top:6px;">{{ user.email }}</div>
+            {% endif %}
+          </div>
+
+        </div>
+
+
+
+        <div class="resume-content" style="display:grid; grid-template-columns: 36% 64%; gap:12px; align-items:start;">
+
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+
+            {% if portfolio.get('contact information') %}
+            <div class="resume-block">
+              <div class="section-title">Contact Information</div>
+              <div class="resume-muted">{{ portfolio['contact information']|safe }}</div>
+            </div>
+            {% endif %}
+
+            {# Assessments / Certifications - try multiple common keys and ignore literal "None" #}
+            {% set _asses = (
+            portfolio.get('assessments / certifications')
+            or portfolio.get('assessments')
+            or portfolio.get('certifications')
+            or portfolio.get('assessments_certifications')
+            or portfolio.get('assessment_certificates')
+            or portfolio.get('assessment')
+            ) %}
+            {% if _asses %}
+            {% set _asses_str = (_asses|string).strip() %}
+            {% if _asses_str and _asses_str|lower != 'none' %}
+            <div class="resume-block">
+              <div class="section-title">Assessments / Certifications</div>
+              <div class="resume-muted">{{ _asses_str|safe }}</div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {# Known Languages - support several key names #}
+            {% set _langs = (
+            portfolio.get('known languages')
+            or portfolio.get('languages')
+            or portfolio.get('known_language')
+            ) %}
+            {% if _langs %}
+            {% set _langs_str = (_langs|string).strip() %}
+            {% if _langs_str and _langs_str|lower != 'none' %}
+            <div class="resume-block">
+              <div class="section-title">Known Languages</div>
+              <div class="resume-muted">{{ _langs_str|safe }}</div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {% if portfolio.get('interests') %}
+            <div class="resume-block">
+              <div class="section-title">Interests</div>
+              <div class="resume-muted">{{ portfolio['interests']|safe }}</div>
+            </div>
+            {% endif %}
+
+          </div>
+
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+
+            {% if portfolio.get('key expertise') %}
+            <div class="resume-block">
+              <div class="section-title">Key Expertise</div>
+              <div class="resume-muted">{{ portfolio['key expertise']|safe }}</div>
+            </div>
+            {% endif %}
+
+            {% if portfolio.get('education') %}
+            <div class="resume-block">
+              <div class="section-title">Education</div>
+              <div class="resume-muted">{{ portfolio['education']|safe }}</div>
+            </div>
+            {% endif %}
+
+            {% if portfolio.get('projects') %}
+            <div class="resume-block">
+              <div class="section-title">Projects</div>
+              <div class="resume-muted">{{ portfolio['projects']|safe }}</div>
+            </div>
+            {% endif %}
+
+            {% if skills_list %}
+            <div class="resume-block">
+              <div class="section-title">Skills</div>
+              <div class="resume-muted" style="display:flex; flex-wrap:wrap; gap:6px;">
+                {% for s in skills_list %}
+                <span
+                  style="display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);font-size:11px;">
+                  {{ s }}
+                </span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+
+            {# Achievements - try multiple keys and ignore "None" #}
+            {% set _ach = (
+            portfolio.get('achievements')
+            or portfolio.get('achievement')
+            or portfolio.get('awards')
+            ) %}
+            {% if _ach %}
+            {% set _ach_str = (_ach|string).strip() %}
+            {% if _ach_str and _ach_str|lower != 'none' %}
+            <div class="resume-block">
+              <div class="section-title">Achievements</div>
+              <div class="resume-muted">{{ _ach_str|safe }}</div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {# Render any right-side extras only if they were saved to namespace.right_extra earlier #}
+            {% if namespace is defined and namespace.right_extra %}
+            {% for item in namespace.right_extra %}
+            {% set title = item[0] %}
+            {% set content = item[1] %}
+            {% if content and (content|string).strip() and (content|string).strip()|lower != 'none' %}
+            <div class="resume-block">
+              <div class="section-title">{{ title.title() }}</div>
+              <div class="resume-muted">{{ content|safe }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div id="projectsModal" class="modal" aria-hidden="true">
+      <div class="inner">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="margin:0">Projects</h3>
+          <button id="closeProjects" class="btn ghost">Close</button>
+        </div>
+        <div style="margin-top:12px; color:var(--muted)" id="projectsModalContent">{{ projects_html|safe }}</div>
+
+      </div>
+    </div>
+
+
+    <div id="publishModal" class="modal" aria-hidden="true">
+      <div class="inner">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="margin:0">Published</h3>
+          <button id="closePublish" class="btn ghost">Close</button>
+        </div>
+
+        <div style="margin-top:12px">
+          <p>Shareable link (copy & share):</p>
+          <div style="margin-top:8px; display:flex; gap:8px;">
+            <input id="publishUrl" type="text" readonly
+              style="flex:1; padding:.5rem; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+            <button id="copyPublish" class="btn">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      const body = document.getElementById('bodyRoot');
+      const paletteSelect = document.getElementById('paletteSelect');
+      const toggleThemeBtn = document.getElementById('toggleTheme');
+      const toggleLayoutBtn = document.getElementById('toggleLayout');
+      const gridView = document.getElementById('gridView');
+      const resumeView = document.getElementById('resumeView');
+      const resumeWrap = document.getElementById('resumeWrap');
+      const openProjects = document.getElementById('openProjects');
+      const projectsModal = document.getElementById('projectsModal');
+      const closeProjects = document.getElementById('closeProjects');
+      const projectsModalContent = document.getElementById('projectsModalContent');
+
+
+      const savedPalette = localStorage.getItem('pf_palette') || '{{ session.get("preview_palette","p2") }}';
+      document.documentElement.setAttribute('data-palette', savedPalette);
+      if (paletteSelect) paletteSelect.value = savedPalette;
+
+      paletteSelect && paletteSelect.addEventListener('change', (e) => {
+        document.documentElement.setAttribute('data-palette', e.target.value);
+        localStorage.setItem('pf_palette', e.target.value);
+      });
+
+
+      const savedTheme = localStorage.getItem('pf_theme') || 'light';
+      if (savedTheme === 'dark') body.classList.add('theme-dark');
+      toggleThemeBtn.addEventListener('click', () => {
+        body.classList.toggle('theme-dark');
+        localStorage.setItem('pf_theme', body.classList.contains('theme-dark') ? 'dark' : 'light');
+      });
+
+
+      function showGrid() { gridView.style.display = 'grid'; resumeView.style.display = 'none'; localStorage.setItem('pf_layout', 'grid'); }
+      function showResume() { gridView.style.display = 'none'; resumeView.style.display = 'block'; localStorage.setItem('pf_layout', 'resume'); requestScaleForA4(); }
+
+      const initLayout = localStorage.getItem('pf_layout') || 'grid';
+      if (initLayout === 'resume') showResume(); else showGrid();
+
+      toggleLayoutBtn.addEventListener('click', () => {
+        if (gridView.style.display === 'none') showGrid(); else showResume();
+      });
+
+
+      openProjects && openProjects.addEventListener('click', () => { projectsModal.style.display = 'flex'; });
+      closeProjects && closeProjects.addEventListener('click', () => projectsModal.style.display = 'none');
+      projectsModal && projectsModal.addEventListener('click', (e) => { if (e.target === projectsModal) projectsModal.style.display = 'none'; });
+
+
+
+      document.querySelectorAll('.navlink').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const el = document.querySelector(targetId);
+
+
+          const headerHeight = document.querySelector('header').offsetHeight;
+
+          if (el) {
+
+            const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // -20 for extra padding
+
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        });
+      });
+
+      document.querySelectorAll('.card').forEach((c, i) => {
+        c.style.opacity = 0; c.style.transform = 'translateY(6px)';
+        setTimeout(() => { c.style.transition = 'all .45s cubic-bezier(.2,.8,.2,1)'; c.style.opacity = 1; c.style.transform = 'none'; }, 80 * i);
+      });
+
+
+      document.addEventListener('DOMContentLoaded', () => {
+
+
+        document.querySelectorAll('#projectsContent, #projectsModalContent, .card').forEach(node => {
+          if (!node) return;
+          let html = node.innerHTML;
+
+          if (html.match(/(^|<br>|\n)\s*-\s+/)) {
+
+            html = html.replace(/(<br>|\n)\s*-\s+/g, '\n- ');
+
+            const lines = html.split('\n');
+            let out = '';
+            let inList = false;
+            for (let line of lines) {
+              const trimmed = line.trim();
+              if (trimmed.startsWith('- ')) {
+                if (!inList) { out += '<ul style="margin:6px 0 8px 18px;color:var(--muted)">'; inList = true; }
+                out += `<li>${trimmed.substring(2)}</li>`;
+              } else {
+                if (inList) { out += '</ul>'; inList = false; }
+                out += trimmed;
+              }
+              out += '<br>';
+            }
+            if (inList) out += '</ul>';
+            node.innerHTML = out;
+          }
+        });
+      });
+
+
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('format') === 'resume') {
+        document.body.classList.add("pdf-mode");
+        gridView.style.display = "none";
+        resumeView.style.display = "block";
+        requestScaleForA4();
+      }
+
+
+
+
+      function requestScaleForA4() {
+        const wrap = document.getElementById('resumeWrap');
+        if (!wrap) return;
+        setTimeout(() => {
+          const elH = wrap.offsetHeight;
+          const A4_PX = 1122; // approx at 96dpi
+          let scale = 1;
+          if (elH > A4_PX) scale = A4_PX / elH;
+
+          if (scale < 0.78) scale = 0.78;
+          if (scale < 1) {
+            wrap.style.transform = `scale(${scale})`;
+            wrap.style.transformOrigin = 'top left';
+          } else {
+            wrap.style.transform = 'none';
+          }
+        }, 140);
+      }
+      window.addEventListener('beforeprint', requestScaleForA4);
+      window.addEventListener('resize', () => { if (resumeView.style.display !== 'none') requestScaleForA4(); });
+      if (resumeView.style.display !== 'none') requestScaleForA4();
+
+
+      const publishBtn = document.getElementById('publishBtn');
+      const publishModal = document.getElementById('publishModal');
+      const closePublish = document.getElementById('closePublish');
+      const publishUrlInput = document.getElementById('publishUrl');
+      const copyPublish = document.getElementById('copyPublish');
+
+      publishBtn && publishBtn.addEventListener('click', () => {
+        publishBtn.disabled = true;
+        fetch(`{{ url_for('main.publish_portfolio', slug=slug) }}?ajax=1`, { headers: { 'Accept': 'application/json' } })
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.url) {
+              publishUrlInput.value = data.url;
+              publishModal.style.display = 'flex';
+              publishBtn.disabled = false;
+            } else {
+              alert('Published but no URL returned.');
+              publishBtn.disabled = false;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Publish failed; please try again.');
+            publishBtn.disabled = false;
+          });
+      });
+
+      closePublish && closePublish.addEventListener('click', () => publishModal.style.display = 'none');
+      copyPublish && copyPublish.addEventListener('click', () => {
+        publishUrlInput.select();
+        document.execCommand('copy');
+        copyPublish.innerText = 'Copied';
+        setTimeout(() => copyPublish.innerText = 'Copy', 1200);
+      });
+
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.card, #resumeWrap').forEach(el => {
+          if (el) el.innerHTML = el.innerHTML.replace(/\\n/g, '<br>');
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("format") === "resume") {
+          document.body.classList.add("pdf-mode");
+
+          const grid = document.getElementById("gridView");
+          const resume = document.getElementById("resumeView");
+
+          if (grid) grid.style.display = "none";
+          if (resume) resume.style.display = "block";
+
+
+          document.querySelectorAll(".card").forEach(c => {
+            c.style.transition = "none";
+            c.style.opacity = "1";
+            c.style.transform = "none";
+          });
+
+
+          setTimeout(() => {
+            if (typeof requestScaleForA4 === "function") {
+              requestScaleForA4();
+            }
+          }, 300);
+        }
+      });
+
+    </script>
+</body>
+
+</html>
